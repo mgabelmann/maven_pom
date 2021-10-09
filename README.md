@@ -4,11 +4,10 @@ Top level POM file for Maven projects so that they all behave the same way and u
 ##settings.xml
 Add the following repository to your settings.xml file so you can access the dependencies published there.
     <profiles>
-      ...
       <profile>
         <id>github</id>
         <repositories>
-			    <repository>
+          <repository>
             <id>github</id>
             <url>https://maven.pkg.github.com/mgabelmann/*</url>
             <snapshots>
@@ -20,9 +19,8 @@ Add the following repository to your settings.xml file so you can access the dep
     </profiles>
     
     <activeProfiles>
-      ...
-		  <activeProfile>github</activeProfile>
-	  </activeProfiles>
+      <activeProfile>github</activeProfile>
+    </activeProfiles>
     
 ##pom.xml
 Add the following to your projects pom.xml file to inherit from the parent pom.
