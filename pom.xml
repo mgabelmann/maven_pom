@@ -73,11 +73,12 @@
         <!-- dependencies : test -->
         <junit-jupiter.version>5.8.1</junit-jupiter.version>
         <mockito.version>4.0.0</mockito.version>
+        <h2database.version>1.4.200</h2database.version>
 
         <!-- dependencies : plugins -->
         <buildnumber-plugin.doCheck>true</buildnumber-plugin.doCheck>
         <buildnumber-plugin.doUpdate>false</buildnumber-plugin.doUpdate>
-        <buildnumber-plugin.doUpdate.skip>false</buildnumber-plugin.doUpdate.skip>
+        <buildnumber-plugin.doUpdate.skip>true</buildnumber-plugin.doUpdate.skip>
         <dependency-plugin.skip>false</dependency-plugin.skip>
         <dependency-plugin.failOnWarning>false</dependency-plugin.failOnWarning>
         <dependencycheck-plugin.skip>false</dependencycheck-plugin.skip>
@@ -89,9 +90,9 @@
         <jacoco-plugin.instruction-coveredratio-minimum>70%</jacoco-plugin.instruction-coveredratio-minimum>
         <javadoc-plugin.skip>false</javadoc-plugin.skip>
         <javadoc-plugin.failOnError>false</javadoc-plugin.failOnError>
-        <javadoc-plugin.doclint>all,-missing</javadoc-plugin.doclint>
+        <javadoc-plugin.doclint>none</javadoc-plugin.doclint>
         <javadoc-plugin.source>${maven.compiler.release}</javadoc-plugin.source>
-        <pmd-plugin.skip>false</pmd-plugin.skip>
+        <pmd-plugin.skip>true</pmd-plugin.skip>
         <spotbugs-plugin.version>4.4.1</spotbugs-plugin.version>
         <spotbugs-plugin.skip>false</spotbugs-plugin.skip>
 
@@ -147,6 +148,7 @@
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
+                <version>${h2database.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -196,7 +198,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.1.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-report-plugin</artifactId>
+                    <version>3.0.0-M5</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -240,6 +247,19 @@
                                     </requireMavenVersion>
                                 </rules>
                             </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.2.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
                         </execution>
                     </executions>
                 </plugin>
@@ -346,6 +366,9 @@
                         <doUpdate>${buildnumber-plugin.doUpdate}</doUpdate>
                         <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                         <revisionOnScmFailure>X</revisionOnScmFailure>
+                        <providerImplementations>
+                            <git>git</git>
+                        </providerImplementations>
                         <shortRevisionLength>5</shortRevisionLength>
                     </configuration>
                     <executions>
@@ -423,6 +446,14 @@
                     </executions>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.9.1</version>
+                    <configuration>
+                        <attach>true</attach>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>0.8.7</version>
@@ -464,7 +495,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
                 <plugin>
                     <groupId>org.owasp</groupId>
                     <artifactId>dependency-check-maven</artifactId>
@@ -534,6 +564,7 @@
                     </reportSet>
                 </reportSets>
             </plugin>
+            <!-- NOTE: need to configure rules since some are deprecated and it throws errors with Java 16.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
@@ -565,6 +596,7 @@
                     </rulesets>
                 </configuration>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
