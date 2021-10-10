@@ -193,33 +193,16 @@
                         <skip>${pmd-plugin.skip}</skip>
                         <linkXRef>false</linkXRef>
                         <skipEmptyReport>false</skipEmptyReport>
-                        <!-- NOTE: need to configure rules since some are deprecated and it throws errors with Java 16.
                         <rulesets>
-                            <ruleset>/rulesets/java/basic.xml</ruleset>
-                            <ruleset>/rulesets/java/braces.xml</ruleset>
-                            <ruleset>/rulesets/java/clone.xml</ruleset>
-                            <ruleset>/rulesets/java/comments.xml</ruleset>
-                            <ruleset>/rulesets/java/controversial.xml</ruleset>
-                            <ruleset>/rulesets/java/coupling.xml</ruleset>
-                            <ruleset>/rulesets/java/design.xml</ruleset>
-                            <ruleset>/rulesets/java/empty.xml</ruleset>
-                            <ruleset>/rulesets/java/finalizers.xml</ruleset>
-                            <ruleset>/rulesets/java/imports.xml</ruleset>
-                            <ruleset>/rulesets/java/j2ee.xml</ruleset>
-                            <ruleset>/rulesets/java/javabeans.xml</ruleset>
-                            <ruleset>/rulesets/java/junit.xml</ruleset>
-                            <ruleset>/rulesets/java/metrics.xml</ruleset>
-                            <ruleset>/rulesets/java/migrating.xml</ruleset>
-                            <ruleset>/rulesets/java/naming.xml</ruleset>
-                            <ruleset>/rulesets/java/optimizations.xml</ruleset>
-                            <ruleset>/rulesets/java/strictexception.xml</ruleset>
-                            <ruleset>/rulesets/java/strings.xml</ruleset>
-                            <ruleset>/rulesets/java/sunsecure.xml</ruleset>
-                            <ruleset>/rulesets/java/typeresolution.xml</ruleset>
-                            <ruleset>/rulesets/java/unnecessary.xml</ruleset>
-                            <ruleset>/rulesets/java/unusedcode.xml</ruleset>
+                            <ruleset>/category/java/bestpractices.xml</ruleset>
+                            <ruleset>/category/java/codestyle.xml</ruleset>
+                            <ruleset>/category/java/design.xml</ruleset>
+                            <ruleset>/category/java/documentation.xml</ruleset>
+                            <ruleset>/category/java/errorprone.xml</ruleset>
+                            <ruleset>/category/java/multithreading.xml</ruleset>
+                            <ruleset>/category/java/performance.xml</ruleset>
+                            <ruleset>/category/java/security.xml</ruleset>
                         </rulesets>
-                        -->
                     </configuration>
                 </plugin>
                 <plugin>
@@ -596,7 +579,7 @@
                 <reportSets>
                     <reportSet>
                         <reports>
-                            <!--<report>pmd</report>-->
+                            <report>pmd</report>
                             <report>cpd</report>
                         </reports>
                     </reportSet>
@@ -604,7 +587,7 @@
                         <id>aggregate</id>
                         <inherited>false</inherited>
                         <reports>
-                            <!--<report>aggregate-pmd</report>-->
+                            <report>aggregate-pmd</report>
                             <report>aggregate-cpd</report>
                         </reports>
                     </reportSet>
