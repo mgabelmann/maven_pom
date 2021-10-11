@@ -57,6 +57,9 @@
 
     <properties>
         <maven.compiler.release>16</maven.compiler.release>
+        <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+        <maven.compiler.debug>true</maven.compiler.debug>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -78,13 +81,14 @@
         <!-- dependencies : plugins -->
         <buildnumber-plugin.doCheck>true</buildnumber-plugin.doCheck>
         <buildnumber-plugin.doUpdate>false</buildnumber-plugin.doUpdate>
-        <buildnumber-plugin.doUpdate.skip>true</buildnumber-plugin.doUpdate.skip>
+        <buildnumber-plugin.skip>true</buildnumber-plugin.skip>
         <dependency-plugin.skip>false</dependency-plugin.skip>
         <dependency-plugin.failOnWarning>false</dependency-plugin.failOnWarning>
         <dependencycheck-plugin.skip>false</dependencycheck-plugin.skip>
         <enforcer-plugin.skip>false</enforcer-plugin.skip>
         <enforcer-plugin.javaRule>[11.0,)</enforcer-plugin.javaRule>
         <enforcer-plugin.mavenRule>[3.6,)</enforcer-plugin.mavenRule>
+        <findsecbugs.verison>1.11.0</findsecbugs.verison>
         <jacoco-plugin.haltOnFailure>false</jacoco-plugin.haltOnFailure>
         <jacoco-plugin.skip>false</jacoco-plugin.skip>
         <jacoco-plugin.instruction-coveredratio-minimum>70%</jacoco-plugin.instruction-coveredratio-minimum>
@@ -93,6 +97,7 @@
         <javadoc-plugin.doclint>none</javadoc-plugin.doclint>
         <javadoc-plugin.source>${maven.compiler.release}</javadoc-plugin.source>
         <pmd-plugin.skip>false</pmd-plugin.skip>
+        <source-plugin.skip>false</source-plugin.skip>
         <spotbugs-plugin.version>4.4.1</spotbugs-plugin.version>
         <spotbugs-plugin.skip>false</spotbugs-plugin.skip>
 
@@ -180,7 +185,7 @@
                             <plugin>
                                 <groupId>com.h3xstream.findsecbugs</groupId>
                                 <artifactId>findsecbugs-plugin</artifactId>
-                                <version>1.11.0</version>
+                                <version>${findsecbugs.verison}</version>
                             </plugin>
                         </plugins>
                     </configuration>
@@ -221,6 +226,9 @@
                     <version>3.8.1</version>
                     <configuration>
                         <release>${maven.compiler.release}</release>
+                        <debug>${maven.compiler.debug}</debug>
+                        <showWarnings>${maven.compiler.showWarnings}</showWarnings>
+                        <showDeprecation>${maven.compiler.showDeprecation}</showDeprecation>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -240,7 +248,7 @@
                     <version>3.0.0-M3</version>
                     <executions>
                         <execution>
-                            <id>enforce-maven</id>
+                            <id>enforcer-enforce</id>
                             <goals>
                                 <goal>enforce</goal>
                             </goals>
@@ -264,6 +272,9 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>3.2.1</version>
+                    <configuration>
+                        <skipSource>${source-plugin.skip}</skipSource>
+                    </configuration>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -325,6 +336,7 @@
                     <!-- NOTE: create test jars for use by other modules -->
                     <executions>
                         <execution>
+                            <id>jar-tests</id>
                             <goals>
                                 <goal>test-jar</goal>
                             </goals>
@@ -371,18 +383,19 @@
                     <artifactId>buildnumber-maven-plugin</artifactId>
                     <version>1.4</version>
                     <configuration>
-                        <skip>${buildnumber-plugin.doUpdate.skip}</skip>
+                        <skip>${buildnumber-plugin.skip}</skip>
                         <doCheck>${buildnumber-plugin.doCheck}</doCheck>
                         <doUpdate>${buildnumber-plugin.doUpdate}</doUpdate>
                         <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                         <revisionOnScmFailure>X</revisionOnScmFailure>
                         <providerImplementations>
-                            <git>git</git>
+                            <!--<git>git</git>-->
                         </providerImplementations>
                         <shortRevisionLength>5</shortRevisionLength>
                     </configuration>
                     <executions>
                         <execution>
+                            <id>buildnumber-create</id>
                             <phase>validate</phase>
                             <goals>
                                 <goal>create</goal>
@@ -445,7 +458,7 @@
                     </dependencies>
                     <executions>
                         <execution>
-                            <id>integration tests</id>
+                            <id>failsafe-test</id>
                             <phase>integration-test</phase>
                             <goals>
                                 <goal>integration-test</goal>
@@ -468,6 +481,7 @@
                     <version>0.8.7</version>
                     <executions>
                         <execution>
+                            <id>jacoco-prepare</id>
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
@@ -515,7 +529,9 @@
                     </configuration>
                     <executions>
                         <execution>
+                            <id>dependencycheck-check</id>
                             <goals>
+                                <!-- NOTE: tied to verify phase -->
                                 <goal>check</goal>
                             </goals>
                         </execution>
@@ -556,7 +572,7 @@
                         <plugin>
                             <groupId>com.h3xstream.findsecbugs</groupId>
                             <artifactId>findsecbugs-plugin</artifactId>
-                            <version>1.11.0</version>
+                            <version>${findsecbugs.verison}</version>
                         </plugin>
                     </plugins>
                 </configuration>
