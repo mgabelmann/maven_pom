@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ca.mikegabelmann.maven</groupId>
@@ -56,53 +57,51 @@
     </modules>
 
     <properties>
-        <maven.compiler.release>16</maven.compiler.release>
-        <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
-        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-        <maven.compiler.debug>true</maven.compiler.debug>
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <timestamp>${maven.build.timestamp}</timestamp>
 
+        <!-- NOTE: skip all testing, skip unit tests, skip integration tests -->
         <skipTesting>false</skipTesting>
         <skipUT>false</skipUT>
         <skipIT>false</skipIT>
 
         <!-- dependencies : normal -->
-        <jackson.version>2.13.0</jackson.version>
-        <log4j.version>2.14.1</log4j.version>
-
-        <!-- dependencies : test -->
-        <junit-jupiter.version>5.8.1</junit-jupiter.version>
-        <mockito.version>4.0.0</mockito.version>
         <h2database.version>1.4.200</h2database.version>
+        <jackson.version>2.13.0</jackson.version>
+        <junit-jupiter.version>5.8.1</junit-jupiter.version>
+        <log4j.version>2.14.1</log4j.version>
+        <mockito.version>4.0.0</mockito.version>
+        <spring-framework.version>5.3.10</spring-framework.version>
 
         <!-- dependencies : plugins -->
         <buildnumber-plugin.doCheck>true</buildnumber-plugin.doCheck>
         <buildnumber-plugin.doUpdate>false</buildnumber-plugin.doUpdate>
         <buildnumber-plugin.skip>true</buildnumber-plugin.skip>
-        <dependency-plugin.skip>false</dependency-plugin.skip>
         <dependency-plugin.failOnWarning>false</dependency-plugin.failOnWarning>
+        <dependency-plugin.skip>false</dependency-plugin.skip>
         <dependencycheck-plugin.skip>false</dependencycheck-plugin.skip>
-        <enforcer-plugin.skip>false</enforcer-plugin.skip>
         <enforcer-plugin.javaRule>[11.0,)</enforcer-plugin.javaRule>
         <enforcer-plugin.mavenRule>[3.6,)</enforcer-plugin.mavenRule>
+        <enforcer-plugin.skip>false</enforcer-plugin.skip>
+        <failsafe-plugin.argLine>--illegal-access=permit</failsafe-plugin.argLine>
         <findsecbugs.verison>1.11.0</findsecbugs.verison>
         <jacoco-plugin.haltOnFailure>false</jacoco-plugin.haltOnFailure>
-        <jacoco-plugin.skip>false</jacoco-plugin.skip>
         <jacoco-plugin.instruction-coveredratio-minimum>70%</jacoco-plugin.instruction-coveredratio-minimum>
-        <javadoc-plugin.skip>false</javadoc-plugin.skip>
-        <javadoc-plugin.failOnError>false</javadoc-plugin.failOnError>
+        <jacoco-plugin.skip>false</jacoco-plugin.skip>
         <javadoc-plugin.doclint>none</javadoc-plugin.doclint>
+        <javadoc-plugin.failOnError>false</javadoc-plugin.failOnError>
+        <javadoc-plugin.skip>false</javadoc-plugin.skip>
         <javadoc-plugin.source>${maven.compiler.release}</javadoc-plugin.source>
+        <maven.compiler.debug>true</maven.compiler.debug>
+        <maven.compiler.release>16</maven.compiler.release>
+        <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
         <pmd-plugin.skip>false</pmd-plugin.skip>
         <source-plugin.skip>false</source-plugin.skip>
-        <spotbugs-plugin.version>4.4.1</spotbugs-plugin.version>
         <spotbugs-plugin.skip>false</spotbugs-plugin.skip>
-
+        <spotbugs-plugin.version>4.4.1</spotbugs-plugin.version>
         <surefire-plugin.argLine>--illegal-access=permit</surefire-plugin.argLine>
-        <failsafe-plugin.argLine>--illegal-access=permit</failsafe-plugin.argLine>
 
         <!-- dependencies : reporting -->
 
@@ -124,7 +123,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-bom</artifactId>
@@ -132,7 +130,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
@@ -140,11 +137,10 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
-                <version>5.3.10</version>
+                <version>${spring-framework.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -562,7 +558,6 @@
     </build>
 
     <reporting>
-        <!-- FIXME: some plugins not resolving correctly with code below -->
         <plugins>
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
