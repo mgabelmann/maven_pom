@@ -3,6 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+    <!--
+
+    Guide to the Maven lifecycle:
+    https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
+
+    -->
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ca.mikegabelmann.maven</groupId>
@@ -61,10 +68,14 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <timestamp>${maven.build.timestamp}</timestamp>
 
-        <!-- NOTE: skip all testing, skip unit tests, skip integration tests -->
-        <skipTesting>false</skipTesting>
-        <skipUT>false</skipUT>
-        <skipIT>false</skipIT>
+        <!-- NOTE: skip unit and integration tests completely (compile and running) -->
+        <maven.test.skip>false</maven.test.skip>
+
+        <!-- NOTE: skip running of unit test -->
+        <skipTests>false</skipTests>
+
+        <!-- NOTE: skip running of integration tests -->
+        <skipITs>false</skipITs>
 
         <!-- dependencies : normal -->
         <h2database.version>1.4.200</h2database.version>
@@ -84,7 +95,7 @@
         <enforcer-plugin.javaRule>[11.0,)</enforcer-plugin.javaRule>
         <enforcer-plugin.mavenRule>[3.6,)</enforcer-plugin.mavenRule>
         <enforcer-plugin.skip>false</enforcer-plugin.skip>
-        <failsafe-plugin.argLine>--illegal-access=permit</failsafe-plugin.argLine>
+        <failsafe-plugin.argLine></failsafe-plugin.argLine>
         <findsecbugs.verison>1.11.0</findsecbugs.verison>
         <jacoco-plugin.haltOnFailure>false</jacoco-plugin.haltOnFailure>
         <jacoco-plugin.instruction-coveredratio-minimum>70%</jacoco-plugin.instruction-coveredratio-minimum>
@@ -101,10 +112,9 @@
         <source-plugin.skip>false</source-plugin.skip>
         <spotbugs-plugin.skip>false</spotbugs-plugin.skip>
         <spotbugs-plugin.version>4.4.1</spotbugs-plugin.version>
-        <surefire-plugin.argLine>--illegal-access=permit</surefire-plugin.argLine>
+        <surefire-plugin.argLine></surefire-plugin.argLine>
 
         <!-- dependencies : reporting -->
-
 
     </properties>
 
@@ -405,14 +415,15 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.0.0-M5</version>
                     <configuration>
-                        <skip>${skipTesting}</skip>
-                        <skipTests>${skipUT}</skipTests>
+                        <skip>${maven.test.skip}</skip>
+                        <skipTests>${skipTests}</skipTests>
                         <!-- Add annotation groups to include/exclude
                             <groups></groups>
                             <excludedGroups></excludedGroups>
                         -->
                         <includes>
                             <include>**/*Test.java</include>
+                            <include>**/*TestCase.java</include>
                             <include>**/*TestSuite.java</include>
                         </includes>
                         <argLine>@{argLine} ${surefire-plugin.argLine}</argLine>
@@ -431,9 +442,10 @@
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>3.0.0-M5</version>
                     <configuration>
-                        <skip>${skipTesting}</skip>
+                        <skip>${maven.test.skip}</skip>
+                        <!-- NOTE: if this is true, integration tests will not run! -->
                         <skipTests>false</skipTests>
-                        <skipITs>${skipIT}</skipITs>
+                        <skipITs>${skipITs}</skipITs>
                         <!-- Add annotation groups to include/exclude
                             <groups></groups>
                             <excludedGroups></excludedGroups>
@@ -441,6 +453,7 @@
                         <includes>
                             <include>**/*IT.java</include>
                             <include>**/*ITest.java</include>
+                            <include>**/*ITCase.java</include>
                             <include>**/*ITestSuite.java</include>
                         </includes>
                         <argLine>@{argLine} ${failsafe-plugin.argLine}</argLine>
@@ -554,6 +567,12 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
             </plugin>
+
+            <!-- NOTE: maven-failsafe-plugin is attached to phase:verify -->
+            <!-- NOTE: maven-surefire-plugin is attached to phase:test -->
+            <!-- NOTE: maven-jar-plugin is attached to phase:package and packaging:jar -->
+            <!-- NOTE: maven-war-plugin is attached to phase:package and packaging:war -->
+
         </plugins>
     </build>
 
