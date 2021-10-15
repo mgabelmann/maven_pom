@@ -46,7 +46,7 @@
         <url>https://github.com/mgabelmann/maven_pom</url>
     </scm>
 
-    <prerequisites/>
+    <!--<prerequisites/>-->
     <pluginRepositories/>
 
     <distributionManagement>
