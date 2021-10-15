@@ -40,12 +40,13 @@
     <issueManagement/>
     <ciManagement/>
     <mailingLists/>
+
     <scm>
         <connection>scm:git:https://github.com/mgabelmann/maven_pom</connection>
         <url>https://github.com/mgabelmann/maven_pom</url>
     </scm>
+
     <prerequisites/>
-    <repositories/>
     <pluginRepositories/>
 
     <distributionManagement>
