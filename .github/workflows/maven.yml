@@ -1,9 +1,12 @@
-# this workflow will deploy the artifact to my Maven repository
-name: Java CI with Maven and Deploy
+#this workflow will build the project
+name: Java CI with Maven
 
 on:
-  release:
-    types: [created]
+  push:
+    branches: [ main ]
+
+  pull_request:
+    branches: [ main ]
 
   #run manually
   workflow_dispatch:
@@ -24,9 +27,5 @@ jobs:
 
     - name: Build with Maven
       run: mvn -s $GITHUB_WORKSPACE/.github/workflows/settings.xml -B package
-
-    - name: Deploy to Repository
-      run: mvn -s $GITHUB_WORKSPACE/.github/workflows/settings.xml -B deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}
-        ACTION_PAT: ${{ secrets.ACTION_PAT }}
