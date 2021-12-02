@@ -21,10 +21,12 @@
     <description>
         Top level POM file that other projects can inherit from to minimize configuration and standardize projects.
     </description>
+
     <url/>
     <inceptionYear>2021</inceptionYear>
     <licenses/>
     <organization/>
+
     <developers>
         <developer>
             <id>dev1</id>
@@ -35,8 +37,8 @@
             </roles>
         </developer>
     </developers>
-    <contributors/>
 
+    <contributors/>
     <issueManagement/>
     <ciManagement/>
     <mailingLists/>
@@ -96,7 +98,7 @@
         <enforcer-plugin.javaRule>[11.0,)</enforcer-plugin.javaRule>
         <enforcer-plugin.mavenRule>[3.6,)</enforcer-plugin.mavenRule>
         <enforcer-plugin.skip>false</enforcer-plugin.skip>
-        <failsafe-plugin.argLine></failsafe-plugin.argLine>
+        <failsafe-plugin.argLine/>
         <findsecbugs.verison>1.11.0</findsecbugs.verison>
         <jacoco-plugin.haltOnFailure>false</jacoco-plugin.haltOnFailure>
         <jacoco-plugin.instruction-coveredratio-minimum>70%</jacoco-plugin.instruction-coveredratio-minimum>
@@ -113,7 +115,7 @@
         <source-plugin.skip>false</source-plugin.skip>
         <spotbugs-plugin.skip>false</spotbugs-plugin.skip>
         <spotbugs-plugin.version>4.4.1</spotbugs-plugin.version>
-        <surefire-plugin.argLine></surefire-plugin.argLine>
+        <surefire-plugin.argLine/>
 
         <!-- dependencies : reporting -->
 
