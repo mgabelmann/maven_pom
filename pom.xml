@@ -80,41 +80,57 @@
         <!-- NOTE: skip running of integration tests -->
         <skipITs>false</skipITs>
 
-        <!-- dependencies : normal -->
-        <h2database.version>1.4.200</h2database.version>
+        <!-- dependencies : bom -->
         <jackson.version>2.13.0</jackson.version>
-        <junit-jupiter.version>5.8.1</junit-jupiter.version>
-        <log4j.version>2.14.1</log4j.version>
-        <mockito.version>4.0.0</mockito.version>
-        <spring-framework.version>5.3.10</spring-framework.version>
+        <log4j.version>2.15.0</log4j.version>
+        <junit-jupiter.version>5.8.2</junit-jupiter.version>
+        <spring-framework.version>5.3.13</spring-framework.version>
+
+        <!-- dependencies : normal -->
+        <h2database.version>2.0.202</h2database.version>
+        <mockito.version>4.1.0</mockito.version>
 
         <!-- dependencies : plugins -->
         <buildnumber-plugin.doCheck>true</buildnumber-plugin.doCheck>
         <buildnumber-plugin.doUpdate>false</buildnumber-plugin.doUpdate>
         <buildnumber-plugin.skip>true</buildnumber-plugin.skip>
+
         <dependency-plugin.failOnWarning>false</dependency-plugin.failOnWarning>
         <dependency-plugin.skip>false</dependency-plugin.skip>
+
+        <dependencycheck-plugin.version>6.5.0</dependencycheck-plugin.version>
         <dependencycheck-plugin.skip>false</dependencycheck-plugin.skip>
+
         <enforcer-plugin.javaRule>[11.0,)</enforcer-plugin.javaRule>
         <enforcer-plugin.mavenRule>[3.6,)</enforcer-plugin.mavenRule>
         <enforcer-plugin.skip>false</enforcer-plugin.skip>
+
         <failsafe-plugin.argLine/>
+
         <findsecbugs.verison>1.11.0</findsecbugs.verison>
+
         <jacoco-plugin.haltOnFailure>false</jacoco-plugin.haltOnFailure>
         <jacoco-plugin.instruction-coveredratio-minimum>70%</jacoco-plugin.instruction-coveredratio-minimum>
         <jacoco-plugin.skip>false</jacoco-plugin.skip>
+
         <javadoc-plugin.doclint>none</javadoc-plugin.doclint>
         <javadoc-plugin.failOnError>false</javadoc-plugin.failOnError>
         <javadoc-plugin.skip>false</javadoc-plugin.skip>
         <javadoc-plugin.source>${maven.compiler.release}</javadoc-plugin.source>
+
         <maven.compiler.debug>true</maven.compiler.debug>
         <maven.compiler.release>16</maven.compiler.release>
         <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
         <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+
+        <pmd-plugin.version>3.15.0</pmd-plugin.version>
         <pmd-plugin.skip>false</pmd-plugin.skip>
+
         <source-plugin.skip>false</source-plugin.skip>
+
         <spotbugs-plugin.skip>false</spotbugs-plugin.skip>
-        <spotbugs-plugin.version>4.4.1</spotbugs-plugin.version>
+        <spotbugs-plugin.version>4.5.0.0</spotbugs-plugin.version>
+
         <surefire-plugin.argLine/>
 
         <!-- dependencies : reporting -->
@@ -187,7 +203,7 @@
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
-                    <version>4.3.0</version>
+                    <version>${spotbugs-plugin.version}</version>
                     <configuration>
                         <skip>${spotbugs-plugin.skip}</skip>
                         <plugins>
@@ -202,7 +218,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-pmd-plugin</artifactId>
-                    <version>3.15.0</version>
+                    <version>${pmd-plugin.version}</version>
                     <configuration>
                         <skip>${pmd-plugin.skip}</skip>
                         <linkXRef>false</linkXRef>
@@ -533,7 +549,7 @@
                 <plugin>
                     <groupId>org.owasp</groupId>
                     <artifactId>dependency-check-maven</artifactId>
-                    <version>6.3.2</version>
+                    <version>${dependencycheck-plugin.version}</version>
                     <configuration>
                         <skip>${dependencycheck-plugin.skip}</skip>
                         <failBuildOnCVSS>7</failBuildOnCVSS>
