@@ -87,7 +87,7 @@
         <spring-framework.version>5.3.13</spring-framework.version>
 
         <!-- dependencies : normal -->
-        <h2database.version>2.0.202</h2database.version>
+        <h2database.version>2.0.206</h2database.version>
         <mockito.version>4.1.0</mockito.version>
 
         <!-- dependencies : plugins -->
