@@ -4,10 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <!--
-
     Guide to the Maven lifecycle:
     https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
-
     -->
 
     <modelVersion>4.0.0</modelVersion>
@@ -82,25 +80,28 @@
 
         <!-- dependencies : bom -->
         <jackson.version>2.13.0</jackson.version>
-        <log4j.version>2.17.0</log4j.version>
+        <log4j.version>2.17.1</log4j.version>
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
-        <spring-framework.version>5.3.13</spring-framework.version>
+        <spring-framework.version>5.3.15</spring-framework.version>
 
         <!-- dependencies : normal -->
         <h2database.version>2.0.206</h2database.version>
-        <mockito.version>4.1.0</mockito.version>
+        <mockito.version>4.2.0</mockito.version>
 
         <!-- dependencies : plugins -->
+        <buildnumber-plugin.version>1.4</buildnumber-plugin.version>
         <buildnumber-plugin.doCheck>true</buildnumber-plugin.doCheck>
         <buildnumber-plugin.doUpdate>false</buildnumber-plugin.doUpdate>
         <buildnumber-plugin.skip>true</buildnumber-plugin.skip>
 
+        <dependency-plugin.version>3.2.0</dependency-plugin.version>
         <dependency-plugin.failOnWarning>false</dependency-plugin.failOnWarning>
         <dependency-plugin.skip>false</dependency-plugin.skip>
 
         <dependencycheck-plugin.version>6.5.0</dependencycheck-plugin.version>
         <dependencycheck-plugin.skip>false</dependencycheck-plugin.skip>
 
+        <enforcer-plugin.version>3.0.0-M3</enforcer-plugin.version>
         <enforcer-plugin.javaRule>[11.0,)</enforcer-plugin.javaRule>
         <enforcer-plugin.mavenRule>[3.6,)</enforcer-plugin.mavenRule>
         <enforcer-plugin.skip>false</enforcer-plugin.skip>
@@ -109,14 +110,18 @@
 
         <findsecbugs.verison>1.11.0</findsecbugs.verison>
 
+        <jacoco-plugin.version>0.8.7</jacoco-plugin.version>
         <jacoco-plugin.haltOnFailure>false</jacoco-plugin.haltOnFailure>
         <jacoco-plugin.instruction-coveredratio-minimum>70%</jacoco-plugin.instruction-coveredratio-minimum>
         <jacoco-plugin.skip>false</jacoco-plugin.skip>
 
+        <javadoc-plugin.version>3.2.0</javadoc-plugin.version>
         <javadoc-plugin.doclint>none</javadoc-plugin.doclint>
         <javadoc-plugin.failOnError>false</javadoc-plugin.failOnError>
         <javadoc-plugin.skip>false</javadoc-plugin.skip>
         <javadoc-plugin.source>${maven.compiler.release}</javadoc-plugin.source>
+
+        <site-plugin.version>3.9.1</site-plugin.version>
 
         <maven.compiler.debug>true</maven.compiler.debug>
         <maven.compiler.release>16</maven.compiler.release>
@@ -128,10 +133,13 @@
 
         <source-plugin.skip>false</source-plugin.skip>
 
+        <spotbugs-plugin.version>4.5.3.0</spotbugs-plugin.version>
         <spotbugs-plugin.skip>false</spotbugs-plugin.skip>
-        <spotbugs-plugin.version>4.5.0.0</spotbugs-plugin.version>
 
         <surefire-plugin.argLine/>
+
+        <surefire-report-plugin.version>3.0.0-M5</surefire-report-plugin.version>
+        <project-info-reports-plugin.version>3.1.2</project-info-reports-plugin.version>
 
         <!-- dependencies : reporting -->
 
@@ -238,12 +246,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>${project-info-reports-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-report-plugin</artifactId>
-                    <version>3.0.0-M5</version>
+                    <version>${surefire-report-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -259,7 +267,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>${dependency-plugin.version}</version>
                     <configuration>
                         <skip>${dependency-plugin.skip}</skip>
                         <failOnWarning>${dependency-plugin.failOnWarning}</failOnWarning>
@@ -270,7 +278,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0-M3</version>
+                    <version>${enforcer-plugin.version}</version>
                     <executions>
                         <execution>
                             <id>enforcer-enforce</id>
@@ -312,7 +320,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>${javadoc-plugin.version}</version>
                     <configuration>
                         <skip>${javadoc-plugin.skip}</skip>
                         <failOnError>${javadoc-plugin.failOnError}</failOnError>
@@ -406,7 +414,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>buildnumber-maven-plugin</artifactId>
-                    <version>1.4</version>
+                    <version>${buildnumber-plugin.version}</version>
                     <configuration>
                         <skip>${buildnumber-plugin.skip}</skip>
                         <doCheck>${buildnumber-plugin.doCheck}</doCheck>
@@ -498,7 +506,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.9.1</version>
+                    <version>${site-plugin.version}</version>
                     <configuration>
                         <attach>true</attach>
                     </configuration>
@@ -506,7 +514,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.7</version>
+                    <version>${jacoco-plugin.version}</version>
                     <executions>
                         <execution>
                             <id>jacoco-prepare</id>
@@ -573,18 +581,22 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+                <version>${dependency-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${enforcer-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>${buildnumber-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-plugin.version}</version>
             </plugin>
 
             <!-- NOTE: maven-failsafe-plugin is attached to phase:verify -->
@@ -600,6 +612,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs-plugin.version}</version>
                 <configuration>
                     <plugins>
                         <plugin>
@@ -613,6 +626,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc-plugin.version}</version>
                 <reportSets>
                     <reportSet>
                         <id>javadoc</id>
@@ -625,6 +639,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
+                <version>${pmd-plugin.version}</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -645,18 +660,22 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${project-info-reports-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
+                <version>${site-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>${surefire-report-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-plugin.version}</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -668,6 +687,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
+                <version>${dependencycheck-plugin.version}</version>
                 <reportSets>
                     <reportSet>
                         <reports>
