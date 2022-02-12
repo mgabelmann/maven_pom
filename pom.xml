@@ -89,10 +89,12 @@
         <mockito.version>4.2.0</mockito.version>
 
         <!-- dependencies : plugins -->
-        <buildnumber-plugin.version>1.4</buildnumber-plugin.version>
-        <buildnumber-plugin.doCheck>true</buildnumber-plugin.doCheck>
+        <buildnumber-plugin.version>3.0.0</buildnumber-plugin.version>
+        <buildnumber-plugin.doCheck>false</buildnumber-plugin.doCheck>
         <buildnumber-plugin.doUpdate>false</buildnumber-plugin.doUpdate>
-        <buildnumber-plugin.skip>true</buildnumber-plugin.skip>
+        <buildnumber-plugin.revisionOnScmFailure>X</buildnumber-plugin.revisionOnScmFailure>
+        <buildnumber-plugin.shortRevisionLength>7</buildnumber-plugin.shortRevisionLength>
+        <buildnumber-plugin.skip>false</buildnumber-plugin.skip>
 
         <dependency-plugin.version>3.2.0</dependency-plugin.version>
         <dependency-plugin.failOnWarning>false</dependency-plugin.failOnWarning>
@@ -360,7 +362,9 @@
                                     <manifestEntries>
                                         <SCM-Buildnumber>${buildNumber}</SCM-Buildnumber>
                                         <!--suppress UnresolvedMavenProperty -->
-                                        <SCM-Development>${scmBranch}</SCM-Development>
+                                        <SCM-Development>${buildScmBranch}</SCM-Development>
+                                        <!--suppress UnresolvedMavenProperty -->
+                                        <SCM-Timestamp>${buildTimestamp}</SCM-Timestamp>
                                     </manifestEntries>
                                 </manifestSection>
                             </manifestSections>
@@ -399,7 +403,9 @@
                                     <manifestEntries>
                                         <SCM-Buildnumber>${buildNumber}</SCM-Buildnumber>
                                         <!--suppress UnresolvedMavenProperty -->
-                                        <SCM-Development>${scmBranch}</SCM-Development>
+                                        <SCM-Development>${buildScmBranch}</SCM-Development>
+                                        <!--suppress UnresolvedMavenProperty -->
+                                        <SCM-Timestamp>${buildTimestamp}</SCM-Timestamp>
                                     </manifestEntries>
                                 </manifestSection>
                             </manifestSections>
@@ -420,11 +426,11 @@
                         <doCheck>${buildnumber-plugin.doCheck}</doCheck>
                         <doUpdate>${buildnumber-plugin.doUpdate}</doUpdate>
                         <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
-                        <revisionOnScmFailure>X</revisionOnScmFailure>
-                        <providerImplementations>
-                            <!--<git>git</git>-->
-                        </providerImplementations>
-                        <shortRevisionLength>5</shortRevisionLength>
+                        <revisionOnScmFailure>${buildnumber-plugin.revisionOnScmFailure}</revisionOnScmFailure>
+                        <shortRevisionLength>${buildnumber-plugin.shortRevisionLength}</shortRevisionLength>
+                        <buildNumberPropertyName>buildNumber</buildNumberPropertyName>
+                        <scmBranchPropertyName>buildScmBranch</scmBranchPropertyName>
+                        <timestampPropertyName>buildTimestamp</timestampPropertyName>
                     </configuration>
                     <executions>
                         <execution>
