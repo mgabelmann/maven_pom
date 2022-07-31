@@ -61,7 +61,7 @@
     <profiles/>
 
     <modules>
-        <!--<module>lib</module>-->
+
     </modules>
 
     <properties>
@@ -79,22 +79,26 @@
         <skipITs>false</skipITs>
 
         <!-- dependencies : bom -->
-        <jackson.version>2.13.0</jackson.version>
-        <log4j.version>2.17.1</log4j.version>
-        <junit-jupiter.version>5.8.2</junit-jupiter.version>
-        <spring-framework.version>5.3.15</spring-framework.version>
+        <jackson.version>2.13.3</jackson.version>
+        <log4j.version>2.18.0</log4j.version>
+        <junit-jupiter.version>5.9.0</junit-jupiter.version>
+        <spring-framework.version>5.3.22</spring-framework.version>
 
         <!-- dependencies : normal -->
-        <h2database.version>2.1.210</h2database.version>
-        <mockito.version>4.2.0</mockito.version>
+        <h2database.version>2.1.214</h2database.version>
+        <mockito.version>4.6.1</mockito.version>
 
         <!-- dependencies : plugins -->
+        <buildhelper-plugin.version>3.0.0</buildhelper-plugin.version>
+
         <buildnumber-plugin.version>3.0.0</buildnumber-plugin.version>
         <buildnumber-plugin.doCheck>false</buildnumber-plugin.doCheck>
         <buildnumber-plugin.doUpdate>false</buildnumber-plugin.doUpdate>
         <buildnumber-plugin.revisionOnScmFailure>X</buildnumber-plugin.revisionOnScmFailure>
         <buildnumber-plugin.shortRevisionLength>7</buildnumber-plugin.shortRevisionLength>
         <buildnumber-plugin.skip>false</buildnumber-plugin.skip>
+
+        <compiler-plugin.version>3.8.1</compiler-plugin.version>
 
         <dependency-plugin.version>3.2.0</dependency-plugin.version>
         <dependency-plugin.failOnWarning>false</dependency-plugin.failOnWarning>
@@ -108,6 +112,7 @@
         <enforcer-plugin.mavenRule>[3.6,)</enforcer-plugin.mavenRule>
         <enforcer-plugin.skip>false</enforcer-plugin.skip>
 
+        <failsafe-plugin.version>3.0.0-M5</failsafe-plugin.version>
         <failsafe-plugin.argLine/>
 
         <findsecbugs.verison>1.11.0</findsecbugs.verison>
@@ -117,13 +122,13 @@
         <jacoco-plugin.instruction-coveredratio-minimum>70%</jacoco-plugin.instruction-coveredratio-minimum>
         <jacoco-plugin.skip>false</jacoco-plugin.skip>
 
+        <jar-plugin.version>3.2.0</jar-plugin.version>
+
         <javadoc-plugin.version>3.2.0</javadoc-plugin.version>
         <javadoc-plugin.doclint>none</javadoc-plugin.doclint>
         <javadoc-plugin.failOnError>false</javadoc-plugin.failOnError>
         <javadoc-plugin.skip>false</javadoc-plugin.skip>
         <javadoc-plugin.source>${maven.compiler.release}</javadoc-plugin.source>
-
-        <site-plugin.version>3.9.1</site-plugin.version>
 
         <maven.compiler.debug>true</maven.compiler.debug>
         <maven.compiler.release>16</maven.compiler.release>
@@ -133,17 +138,24 @@
         <pmd-plugin.version>3.15.0</pmd-plugin.version>
         <pmd-plugin.skip>false</pmd-plugin.skip>
 
+        <site-plugin.version>3.9.1</site-plugin.version>
+
+        <source-plugin.version>3.2.1</source-plugin.version>
         <source-plugin.skip>false</source-plugin.skip>
 
         <spotbugs-plugin.version>4.5.3.0</spotbugs-plugin.version>
         <spotbugs-plugin.skip>false</spotbugs-plugin.skip>
 
+        <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
         <surefire-plugin.argLine/>
 
-        <surefire-report-plugin.version>3.0.0-M5</surefire-report-plugin.version>
-        <project-info-reports-plugin.version>3.1.2</project-info-reports-plugin.version>
+        <war-plugin.version>3.3.1</war-plugin.version>
+
 
         <!-- dependencies : reporting -->
+        <project-info-reports-plugin.version>3.1.2</project-info-reports-plugin.version>
+
+        <surefire-report-plugin.version>3.0.0-M5</surefire-report-plugin.version>
 
     </properties>
 
@@ -258,7 +270,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>${compiler-plugin.version}</version>
                     <configuration>
                         <release>${maven.compiler.release}</release>
                         <debug>${maven.compiler.debug}</debug>
@@ -306,7 +318,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.2.1</version>
+                    <version>${source-plugin.version}</version>
                     <configuration>
                         <skipSource>${source-plugin.skip}</skipSource>
                     </configuration>
@@ -343,7 +355,7 @@
                     <!-- NOTE: jar/war plugin archive section to be kept in sync -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>${jar-plugin.version}</version>
                     <configuration>
                         <archive>
                             <manifest>
@@ -384,7 +396,7 @@
                     <!-- NOTE: jar/war plugin archive section to be kept in sync -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <version>3.3.1</version>
+                    <version>${war-plugin.version}</version>
                     <configuration>
                         <archive>
                             <manifest>
@@ -415,7 +427,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>${buildhelper-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -447,7 +459,7 @@
                     <!-- for unit testing -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
+                    <version>${surefire-plugin.version}</version>
                     <configuration>
                         <skip>${maven.test.skip}</skip>
                         <skipTests>${skipTests}</skipTests>
@@ -474,7 +486,7 @@
                     <!-- for integration testing -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.0.0-M5</version>
+                    <version>${failsafe-plugin.version}</version>
                     <configuration>
                         <skip>${maven.test.skip}</skip>
                         <!-- NOTE: if this is true, integration tests will not run! -->
