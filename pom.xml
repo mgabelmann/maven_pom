@@ -46,7 +46,7 @@
         <url>https://github.com/mgabelmann/maven_pom</url>
     </scm>
 
-    <!--<prerequisites/>-->
+    <repositories/>
     <pluginRepositories/>
 
     <distributionManagement>
@@ -89,7 +89,7 @@
         <mockito.version>4.6.1</mockito.version>
 
         <!-- dependencies : plugins -->
-        <buildhelper-plugin.version>3.0.0</buildhelper-plugin.version>
+        <buildhelper-plugin.version>3.3.0</buildhelper-plugin.version>
 
         <buildnumber-plugin.version>3.0.0</buildnumber-plugin.version>
         <buildnumber-plugin.doCheck>false</buildnumber-plugin.doCheck>
@@ -98,21 +98,19 @@
         <buildnumber-plugin.shortRevisionLength>7</buildnumber-plugin.shortRevisionLength>
         <buildnumber-plugin.skip>false</buildnumber-plugin.skip>
 
-        <compiler-plugin.version>3.8.1</compiler-plugin.version>
-
-        <dependency-plugin.version>3.2.0</dependency-plugin.version>
+        <dependency-plugin.version>3.3.0</dependency-plugin.version>
         <dependency-plugin.failOnWarning>false</dependency-plugin.failOnWarning>
         <dependency-plugin.skip>false</dependency-plugin.skip>
 
-        <dependencycheck-plugin.version>6.5.0</dependencycheck-plugin.version>
+        <dependencycheck-plugin.version>7.1.2</dependencycheck-plugin.version>
         <dependencycheck-plugin.skip>false</dependencycheck-plugin.skip>
 
-        <enforcer-plugin.version>3.0.0-M3</enforcer-plugin.version>
+        <enforcer-plugin.version>3.1.0</enforcer-plugin.version>
         <enforcer-plugin.javaRule>[11.0,)</enforcer-plugin.javaRule>
         <enforcer-plugin.mavenRule>[3.6,)</enforcer-plugin.mavenRule>
         <enforcer-plugin.skip>false</enforcer-plugin.skip>
 
-        <failsafe-plugin.version>3.0.0-M5</failsafe-plugin.version>
+        <failsafe-plugin.version>3.0.0-M7</failsafe-plugin.version>
         <failsafe-plugin.argLine/>
 
         <findsecbugs.verison>1.11.0</findsecbugs.verison>
@@ -122,34 +120,35 @@
         <jacoco-plugin.instruction-coveredratio-minimum>70%</jacoco-plugin.instruction-coveredratio-minimum>
         <jacoco-plugin.skip>false</jacoco-plugin.skip>
 
-        <jar-plugin.version>3.2.0</jar-plugin.version>
+        <jar-plugin.version>3.2.2</jar-plugin.version>
 
-        <javadoc-plugin.version>3.2.0</javadoc-plugin.version>
+        <javadoc-plugin.version>3.4.1</javadoc-plugin.version>
         <javadoc-plugin.doclint>none</javadoc-plugin.doclint>
         <javadoc-plugin.failOnError>false</javadoc-plugin.failOnError>
         <javadoc-plugin.skip>false</javadoc-plugin.skip>
         <javadoc-plugin.source>${maven.compiler.release}</javadoc-plugin.source>
 
+        <maven.compiler.version>3.10.1</maven.compiler.version>
         <maven.compiler.debug>true</maven.compiler.debug>
-        <maven.compiler.release>16</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
         <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
         <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
 
-        <pmd-plugin.version>3.15.0</pmd-plugin.version>
+        <pmd-plugin.version>3.18.0</pmd-plugin.version>
         <pmd-plugin.skip>false</pmd-plugin.skip>
 
-        <site-plugin.version>3.9.1</site-plugin.version>
+        <site-plugin.version>3.12.1</site-plugin.version>
 
         <source-plugin.version>3.2.1</source-plugin.version>
         <source-plugin.skip>false</source-plugin.skip>
 
-        <spotbugs-plugin.version>4.5.3.0</spotbugs-plugin.version>
+        <spotbugs-plugin.version>4.7.1.1</spotbugs-plugin.version>
         <spotbugs-plugin.skip>false</spotbugs-plugin.skip>
 
-        <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+        <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
         <surefire-plugin.argLine/>
 
-        <war-plugin.version>3.3.1</war-plugin.version>
+        <war-plugin.version>3.3.2</war-plugin.version>
 
 
         <!-- dependencies : reporting -->
@@ -270,7 +269,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${compiler-plugin.version}</version>
+                    <version>${maven.compiler.version}</version>
                     <configuration>
                         <release>${maven.compiler.release}</release>
                         <debug>${maven.compiler.debug}</debug>
