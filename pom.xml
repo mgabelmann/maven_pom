@@ -137,7 +137,7 @@
         <pmd-plugin.version>3.18.0</pmd-plugin.version>
         <pmd-plugin.skip>false</pmd-plugin.skip>
 
-        <site-plugin.version>3.12.1</site-plugin.version>
+        <site-plugin.version>4.0.0-M3</site-plugin.version>
 
         <source-plugin.version>3.2.1</source-plugin.version>
         <source-plugin.skip>false</source-plugin.skip>
@@ -152,9 +152,9 @@
 
 
         <!-- dependencies : reporting -->
-        <project-info-reports-plugin.version>3.1.2</project-info-reports-plugin.version>
+        <project-info-reports-plugin.version>3.4.1</project-info-reports-plugin.version>
 
-        <surefire-report-plugin.version>3.0.0-M5</surefire-report-plugin.version>
+        <surefire-report-plugin.version>3.0.0-M7</surefire-report-plugin.version>
 
     </properties>
 
