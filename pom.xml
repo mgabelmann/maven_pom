@@ -67,7 +67,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <timestamp>${maven.build.timestamp}</timestamp>
+        <!--<timestamp>${maven.build.timestamp}</timestamp>-->
 
         <!-- NOTE: skip unit and integration tests completely (compile and running) -->
         <maven.test.skip>false</maven.test.skip>
@@ -554,10 +554,14 @@
                                         <element>CLASS</element>
                                         <excludes>
                                             <!-- NOTE: we don't need to report coverage on our unit and integration tests -->
-                                            <exclude>*Test</exclude>
-                                            <exclude>*TestSuite</exclude>
-                                            <exclude>*IT</exclude>
-                                            <exclude>*ITSuite</exclude>
+                                            <exclude>**/*Test.java</exclude>
+                                            <exclude>**/*TestCase.java</exclude>
+                                            <exclude>**/*TestSuite.java</exclude>
+
+                                            <exclude>**/*IT.java</exclude>
+                                            <exclude>**/*ITest.java</exclude>
+                                            <exclude>**/*ITCase.java</exclude>
+                                            <exclude>**/*ITestSuite.java</exclude>
                                         </excludes>
                                         <limits>
                                             <limit>
