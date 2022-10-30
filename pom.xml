@@ -78,7 +78,7 @@
 
         <!-- dependencies : bom -->
         <spring-boot.version>2.7.4</spring-boot.version>
-        <log4j.version>2.18.0</log4j.version>
+        <log4j2.version>2.18.0</log4j2.version>
         <junit-jupiter.version>5.9.0</junit-jupiter.version>
         <mockito.version>4.6.1</mockito.version>
 
@@ -153,9 +153,7 @@
 
     </properties>
 
-    <dependencies>
-
-    </dependencies>
+    <dependencies/>
 
     <dependencyManagement>
         <dependencies>
@@ -167,14 +165,15 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- NOTE: spring-boot-dependencies imports these, but we may want to override versions -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-bom</artifactId>
-                <version>${log4j.version}</version>
+                <version>${log4j2.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
@@ -286,6 +285,14 @@
                                         <version>${enforcer-plugin.mavenRule}</version>
                                         <message>Maven rule failed - ${enforcer-plugin.mavenRule}</message>
                                     </requireMavenVersion>
+                                    <banDuplicatePomDependencyVersions>
+                                        <message>Duplicate dependency rule failed - remove duplicate(s)</message>
+                                    </banDuplicatePomDependencyVersions>
+                                    <requireNoRepositories>
+                                        <message>No repositories rule failed - use a repository manager instead</message>
+                                        <banRepositories/>
+                                        <banPluginRepositories/>
+                                    </requireNoRepositories>
                                 </rules>
                             </configuration>
                         </execution>
