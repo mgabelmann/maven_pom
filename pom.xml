@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.1.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 https://maven.apache.org/xsd/maven-4.1.0.xsd">
+
+    <modelVersion>4.1.0</modelVersion>
 
     <!--
     Guide to the Maven lifecycle:
     https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
     -->
 
-    <modelVersion>4.0.0</modelVersion>
-
     <groupId>ca.mikegabelmann.maven</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Parent BOM</name>
@@ -20,10 +20,10 @@
         Top level POM file that other projects can inherit from to minimize configuration and standardize projects.
     </description>
 
-    <url/>
+    <url />
     <inceptionYear>2021</inceptionYear>
-    <licenses/>
-    <organization/>
+    <licenses />
+    <organization />
 
     <developers>
         <developer>
@@ -36,18 +36,18 @@
         </developer>
     </developers>
 
-    <contributors/>
-    <issueManagement/>
-    <ciManagement/>
-    <mailingLists/>
+    <contributors />
+    <issueManagement />
+    <ciManagement />
+    <mailingLists />
 
     <scm>
         <connection>scm:git:https://github.com/mgabelmann/maven_pom</connection>
         <url>https://github.com/mgabelmann/maven_pom</url>
     </scm>
 
-    <repositories/>
-    <pluginRepositories/>
+    <repositories />
+    <pluginRepositories />
 
     <distributionManagement>
         <!-- GitHub repository for publishing artifacts -->
@@ -58,9 +58,9 @@
         </repository>
     </distributionManagement>
 
-    <profiles/>
+    <profiles />
 
-    <modules/>
+    <modules />
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -80,7 +80,7 @@
         <spring-boot.version>3.2.5</spring-boot.version>
         <log4j2.version>2.23.1</log4j2.version>
         <junit-jupiter.version>5.10.2</junit-jupiter.version>
-        <mockito.version>5.12.0</mockito.version>
+        <mockito.version>5.18.0</mockito.version>
 
         <!-- dependencies : normal -->
 
@@ -107,7 +107,7 @@
         <enforcer-plugin.skip>false</enforcer-plugin.skip>
 
         <failsafe-plugin.version>3.2.5</failsafe-plugin.version>
-        <failsafe-plugin.argLine/>
+        <failsafe-plugin.argLine />
 
         <findsecbugs.verison>1.13.0</findsecbugs.verison>
 
@@ -142,7 +142,7 @@
         <spotbugs-plugin.skip>false</spotbugs-plugin.skip>
 
         <surefire-plugin.version>3.2.5</surefire-plugin.version>
-        <surefire-plugin.argLine/>
+        <surefire-plugin.argLine />
 
         <war-plugin.version>3.4.0</war-plugin.version>
 
@@ -153,19 +153,19 @@
 
     </properties>
 
-    <dependencies/>
+    <dependencies />
 
     <dependencyManagement>
         <dependencies>
             <!-- BOMs -->
-            <dependency>
+            <!--<dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            -->
             <!-- NOTE: spring-boot-dependencies imports these, but we may want to override versions -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
@@ -290,8 +290,8 @@
                                     </banDuplicatePomDependencyVersions>
                                     <requireNoRepositories>
                                         <message>No repositories rule failed - use a repository manager instead</message>
-                                        <banRepositories/>
-                                        <banPluginRepositories/>
+                                        <banRepositories />
+                                        <banPluginRepositories />
                                     </requireNoRepositories>
                                 </rules>
                             </configuration>
