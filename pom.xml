@@ -77,10 +77,10 @@
         <skipITs>false</skipITs>
 
         <!-- dependencies : bom -->
-        <spring-boot.version>3.2.5</spring-boot.version>
+        <spring-boot.version>3.5.4</spring-boot.version>
         <log4j2.version>2.23.1</log4j2.version>
-        <junit-jupiter.version>5.10.2</junit-jupiter.version>
-        <mockito.version>5.18.0</mockito.version>
+        <junit-jupiter.version>5.13.4</junit-jupiter.version>
+        <mockito.version>5.19.0</mockito.version>
 
         <!-- dependencies : normal -->
 
@@ -101,36 +101,36 @@
         <dependencycheck-plugin.version>7.1.2</dependencycheck-plugin.version>
         <dependencycheck-plugin.skip>false</dependencycheck-plugin.skip>
 
-        <enforcer-plugin.version>3.4.1</enforcer-plugin.version>
+        <enforcer-plugin.version>3.6.1</enforcer-plugin.version>
         <enforcer-plugin.javaRule>[11.0,)</enforcer-plugin.javaRule>
         <enforcer-plugin.mavenRule>[3.6,)</enforcer-plugin.mavenRule>
         <enforcer-plugin.skip>false</enforcer-plugin.skip>
 
-        <failsafe-plugin.version>3.2.5</failsafe-plugin.version>
+        <failsafe-plugin.version>3.5.3</failsafe-plugin.version>
         <failsafe-plugin.argLine />
 
-        <findsecbugs.verison>1.13.0</findsecbugs.verison>
+        <findsecbugs.verison>1.14.0</findsecbugs.verison>
 
-        <jacoco-plugin.version>0.8.12</jacoco-plugin.version>
+        <jacoco-plugin.version>0.8.13</jacoco-plugin.version>
         <jacoco-plugin.haltOnFailure>false</jacoco-plugin.haltOnFailure>
         <jacoco-plugin.instruction-coveredratio-minimum>70%</jacoco-plugin.instruction-coveredratio-minimum>
         <jacoco-plugin.skip>false</jacoco-plugin.skip>
 
-        <jar-plugin.version>3.4.1</jar-plugin.version>
+        <jar-plugin.version>3.4.2</jar-plugin.version>
 
-        <javadoc-plugin.version>3.6.3</javadoc-plugin.version>
+        <javadoc-plugin.version>3.11.2</javadoc-plugin.version>
         <javadoc-plugin.doclint>none</javadoc-plugin.doclint>
         <javadoc-plugin.failOnError>false</javadoc-plugin.failOnError>
         <javadoc-plugin.skip>false</javadoc-plugin.skip>
         <javadoc-plugin.source>${maven.compiler.release}</javadoc-plugin.source>
 
-        <maven.compiler.version>3.13.0</maven.compiler.version>
+        <maven.compiler.version>3.14.0</maven.compiler.version>
         <maven.compiler.debug>true</maven.compiler.debug>
         <maven.compiler.release>17</maven.compiler.release>
         <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
         <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
 
-        <pmd-plugin.version>3.22.0</pmd-plugin.version>
+        <pmd-plugin.version>3.27.0</pmd-plugin.version>
         <pmd-plugin.skip>false</pmd-plugin.skip>
 
         <site-plugin.version>4.0.0-M14</site-plugin.version>
@@ -138,18 +138,18 @@
         <source-plugin.version>3.3.1</source-plugin.version>
         <source-plugin.skip>false</source-plugin.skip>
 
-        <spotbugs-plugin.version>4.8.5</spotbugs-plugin.version>
+        <spotbugs-plugin.version>4.9.3.2</spotbugs-plugin.version>
         <spotbugs-plugin.skip>false</spotbugs-plugin.skip>
 
-        <surefire-plugin.version>3.2.5</surefire-plugin.version>
+        <surefire-plugin.version>3.5.3</surefire-plugin.version>
         <surefire-plugin.argLine />
 
         <war-plugin.version>3.4.0</war-plugin.version>
 
         <!-- dependencies : reporting -->
-        <project-info-reports-plugin.version>3.5.0</project-info-reports-plugin.version>
+        <project-info-reports-plugin.version>3.9.0</project-info-reports-plugin.version>
 
-        <surefire-report-plugin.version>3.2.5</surefire-report-plugin.version>
+        <surefire-report-plugin.version>3.5.3</surefire-report-plugin.version>
 
     </properties>
 
@@ -158,15 +158,125 @@
     <dependencyManagement>
         <dependencies>
             <!-- BOMs -->
-            <!--<dependency>
+
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+
+                <exclusions>
+                    <!-- exclude all JUnit 5 libraries -->
+                    <exclusion>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-engine</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-migrationsupport</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-params</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-commons</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-console</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-engine</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-jfr</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-launcher</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-reporting</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-runner</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-suite</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-suite-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-suite-commons</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-suite-engine</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-testkit</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.vintage</groupId>
+                        <artifactId>junit-vintage-engine</artifactId>
+                    </exclusion>
+
+                    <!-- exclude JUnit 4 libraries -->
+                    <exclusion>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                    </exclusion>
+
+                    <!-- exclude all mockito libraries -->
+                    <exclusion>
+                        <groupId>org.mockito</groupId>
+                        <artifactId>mockito-core</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.mockito</groupId>
+                        <artifactId>mockito-android</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.mockito</groupId>
+                        <artifactId>mockito-errorprone</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.mockito</groupId>
+                        <artifactId>mockito-junit-jupiter</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.mockito</groupId>
+                        <artifactId>mockito-proxy</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.mockito</groupId>
+                        <artifactId>mockito-subclass</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
-            -->
+
             <!-- NOTE: spring-boot-dependencies imports these, but we may want to override versions -->
+            <!--
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-bom</artifactId>
@@ -174,6 +284,8 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            -->
+
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
@@ -181,6 +293,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-bom</artifactId>
@@ -458,11 +571,10 @@
                         <argLine>@{argLine} ${surefire-plugin.argLine}</argLine>
                     </configuration>
                     <dependencies>
-                        <dependency>
-                            <groupId>org.junit.jupiter</groupId>
-                            <artifactId>junit-jupiter-engine</artifactId>
-                            <version>${junit-jupiter.version}</version>
-                        </dependency>
+                        <!-- NOTE: if you include junit dependencies here, you may run into issues since the
+                                   surefire plugin imports it as well and there could be conflicts/version
+                                   incompatibilities.
+                        -->
                     </dependencies>
                 </plugin>
                 <plugin>
@@ -488,11 +600,10 @@
                         <argLine>@{argLine} ${failsafe-plugin.argLine}</argLine>
                     </configuration>
                     <dependencies>
-                        <dependency>
-                            <groupId>org.junit.jupiter</groupId>
-                            <artifactId>junit-jupiter-engine</artifactId>
-                            <version>${junit-jupiter.version}</version>
-                        </dependency>
+                        <!-- NOTE: if you include junit dependencies here, you may run into issues since the
+                                   surefire plugin imports it as well and there could be conflicts/version
+                                   incompatibilities.
+                        -->
                     </dependencies>
                     <executions>
                         <execution>
