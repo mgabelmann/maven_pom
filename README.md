@@ -45,9 +45,19 @@ Maven repository.
 Once you have either updated your settings.xml or installed the project in your local Maven repository then you can
 begin using it by adding it to your local project(s).
 
+For Maven 3 use:
+
     <parent>
-      <groupId>ca.mikegabelmann.maven</groupId>
-      <artifactId>parent</artifactId>
-      <version>1.0-SNAPSHOT</version>
+        <groupId>ca.mikegabelmann.maven</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+For Maven 4 use:
+
+    <parent>
+        <groupId>ca.mikegabelmann.maven</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.1-SNAPSHOT</version>
     </parent>
 
