@@ -1,5 +1,5 @@
 # this workflow will deploy the artifact to my Maven repository
-name: Java CI with Maven and Deploy
+name: Java Build and Deployment
 
 on:
   release:
@@ -25,6 +25,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          server-id: github
 
       - name: Set up Apache Maven 4.1.0
         uses: stcarolas/setup-maven@v5
@@ -33,8 +34,7 @@ jobs:
 
       #no caching necessary
 
-      - name: Build and deploy with Maven
-        run: mvn -s $GITHUB_WORKSPACE/.github/workflows/settings.xml -B package deploy
+      - name: Build and Deploy with Maven
+        run: mvn -B deploy
         env:
-          GITHUB_TOKEN: ${{ github.token }}
-          ACTION_PAT: ${{ secrets.ACTION_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

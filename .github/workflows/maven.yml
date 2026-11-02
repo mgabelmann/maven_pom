@@ -1,5 +1,5 @@
 #this workflow will build the project
-name: Java CI with Maven 4.1
+name: Java Build
 
 on:
   push:
@@ -15,6 +15,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -24,6 +27,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          server-id: github
 
       - name: Set up Apache Maven 4.1.0
         uses: stcarolas/setup-maven@v5
@@ -33,7 +37,7 @@ jobs:
       #no caching necessary
 
       - name: Build with Maven
-        run: mvn -s $GITHUB_WORKSPACE/.github/workflows/settings.xml -B package
+        run: mvn -B package
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACTION_PAT: ${{ secrets.ACTION_PAT }}
