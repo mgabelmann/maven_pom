@@ -12,6 +12,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -27,7 +31,9 @@ jobs:
         with:
           maven-version: '4.0.0-rc-7'
 
-      - name: Build and deploy
+      #no caching necessary
+
+      - name: Build and deploy with Maven
         run: mvn -s $GITHUB_WORKSPACE/.github/workflows/settings.xml -B package deploy
         env:
           GITHUB_TOKEN: ${{ github.token }}
