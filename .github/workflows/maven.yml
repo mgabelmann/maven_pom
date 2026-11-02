@@ -1,5 +1,5 @@
 #this workflow will build the project
-name: Java CI with Maven
+name: Java CI with Maven 4.1
 
 on:
   push:
@@ -13,19 +13,27 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 11
-      uses: actions/setup-java@v4
-      with:
-        java-version: '11'
-        distribution: 'adopt'
-        cache: maven
+      - name: Checkout repository
+        uses: actions/checkout@v7
 
-    - name: Build with Maven
-      run: mvn -s $GITHUB_WORKSPACE/.github/workflows/settings.xml -B package
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Apache Maven 4.1.0
+        uses: stcarolas/setup-maven@v5
+        with:
+          maven-version: 4.0.0-rc-7
+
+      #no caching necessary
+
+      - name: Build with Maven
+        run: mvn -s $GITHUB_WORKSPACE/.github/workflows/settings.xml -B package
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          ACTION_PAT: ${{ secrets.ACTION_PAT }}
