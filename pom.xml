@@ -55,7 +55,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Maven Repository</name>
-            <url>https://github.com/mgabelmann/repository</url>
+            <url>https://maven.pkg.github.com/mgabelmann/repository</url>
         </repository>
     </distributionManagement>
 
