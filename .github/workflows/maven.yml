@@ -28,7 +28,7 @@ jobs:
       - name: Set up Apache Maven 4.1.0
         uses: stcarolas/setup-maven@v5
         with:
-          maven-version: 4.0.0-rc-7
+          maven-version: '4.0.0-rc-7'
 
       #no caching necessary
 
