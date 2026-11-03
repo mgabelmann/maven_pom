@@ -95,6 +95,8 @@
         <buildnumber-plugin.shortRevisionLength>7</buildnumber-plugin.shortRevisionLength>
         <buildnumber-plugin.skip>false</buildnumber-plugin.skip>
 
+        <clean-plugin.version>3.4.1</clean-plugin.version>
+
         <dependency-plugin.version>3.6.1</dependency-plugin.version>
         <dependency-plugin.failOnWarning>false</dependency-plugin.failOnWarning>
         <dependency-plugin.skip>false</dependency-plugin.skip>
@@ -133,6 +135,8 @@
 
         <pmd-plugin.version>3.27.0</pmd-plugin.version>
         <pmd-plugin.skip>false</pmd-plugin.skip>
+
+        <resources-plugin.version>4.0.0-beta-2</resources-plugin.version>
 
         <site-plugin.version>4.0.0-M14</site-plugin.version>
 
@@ -369,6 +373,11 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${clean-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>${dependency-plugin.version}</version>
                     <configuration>
@@ -552,6 +561,11 @@
                         </execution>
                     </executions>
                 </plugin>
+                <!--<plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${resources-plugin.version}</version>
+                </plugin>-->
                 <plugin>
                     <!-- for unit testing -->
                     <groupId>org.apache.maven.plugins</groupId>
