@@ -36,6 +36,6 @@ jobs:
 
       #requires a special token with repo, read/write packages permissions
       - name: Build and Deploy with Maven
-        run: mvn -B deploy
+        run: mvn -ntp -B deploy
         env:
           GITHUB_TOKEN: ${{ secrets.ACTIONS }}
