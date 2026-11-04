@@ -31,6 +31,7 @@
             <name>Michael Gabelmann</name>
             <url>https://github.com/mgabelmann</url>
             <roles>
+
                 <role>maintainer</role>
             </roles>
         </developer>
@@ -76,13 +77,15 @@
         <!-- NOTE: skip running of integration tests -->
         <skipITs>false</skipITs>
 
-        <!-- dependencies : bom -->
-        <spring-boot.version>3.2.5</spring-boot.version>
-        <log4j2.version>2.23.1</log4j2.version>
-        <junit-jupiter.version>5.10.2</junit-jupiter.version>
-        <mockito.version>5.12.0</mockito.version>
+        <!-- dependencies : Bill Of Materials (BOM) -->
+        <!-- NOTE: spring-boots BOM includes log4j, junit and mockito, try to keep versions in sync with it -->
+        <spring-boot.version>4.1.2</spring-boot.version>
+        <log4j2.version>2.25.5</log4j2.version>
+        <junit-jupiter.version>6.0.3</junit-jupiter.version>
+        <mockito.version>5.23.0</mockito.version>
 
         <!-- dependencies : normal -->
+
 
         <!-- dependencies : plugins -->
         <buildhelper-plugin.version>3.6.0</buildhelper-plugin.version>
@@ -106,10 +109,10 @@
         <enforcer-plugin.mavenRule>[3.6,)</enforcer-plugin.mavenRule>
         <enforcer-plugin.skip>false</enforcer-plugin.skip>
 
-        <failsafe-plugin.version>3.2.5</failsafe-plugin.version>
+        <failsafe-plugin.version>3.5.2</failsafe-plugin.version>
         <failsafe-plugin.argLine/>
 
-        <findsecbugs.verison>1.13.0</findsecbugs.verison>
+        <findsecbugs.verison>1.14.0</findsecbugs.verison>
 
         <jacoco-plugin.version>0.8.12</jacoco-plugin.version>
         <jacoco-plugin.haltOnFailure>false</jacoco-plugin.haltOnFailure>
@@ -138,13 +141,14 @@
         <source-plugin.version>3.3.1</source-plugin.version>
         <source-plugin.skip>false</source-plugin.skip>
 
-        <spotbugs-plugin.version>4.8.5</spotbugs-plugin.version>
+        <spotbugs-plugin.version>4.10.5.0</spotbugs-plugin.version>
         <spotbugs-plugin.skip>false</spotbugs-plugin.skip>
 
-        <surefire-plugin.version>3.2.5</surefire-plugin.version>
+        <surefire-plugin.version>3.5.2</surefire-plugin.version>
         <surefire-plugin.argLine/>
 
         <war-plugin.version>3.4.0</war-plugin.version>
+
 
         <!-- dependencies : reporting -->
         <project-info-reports-plugin.version>3.5.0</project-info-reports-plugin.version>
@@ -157,16 +161,8 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- BOMs -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- NOTE: spring-boot-dependencies imports these, but we may want to override versions -->
+            <!-- BOMs - processed in order -->
+            <!-- NOTE: spring-boot imports log4j, junit and mockito, so import it last as first one wins -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-bom</artifactId>
@@ -185,6 +181,13 @@
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-bom</artifactId>
                 <version>${mockito.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -458,11 +461,12 @@
                         <argLine>@{argLine} ${surefire-plugin.argLine}</argLine>
                     </configuration>
                     <dependencies>
+                        <!-- should not be required for version 3.x or greater
                         <dependency>
                             <groupId>org.junit.jupiter</groupId>
                             <artifactId>junit-jupiter-engine</artifactId>
                             <version>${junit-jupiter.version}</version>
-                        </dependency>
+                        </dependency>-->
                     </dependencies>
                 </plugin>
                 <plugin>
@@ -488,11 +492,12 @@
                         <argLine>@{argLine} ${failsafe-plugin.argLine}</argLine>
                     </configuration>
                     <dependencies>
+                        <!-- should not be required for version 3.x or greater
                         <dependency>
                             <groupId>org.junit.jupiter</groupId>
                             <artifactId>junit-jupiter-engine</artifactId>
                             <version>${junit-jupiter.version}</version>
-                        </dependency>
+                        </dependency>-->
                     </dependencies>
                     <executions>
                         <execution>
